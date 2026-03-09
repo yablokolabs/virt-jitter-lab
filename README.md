@@ -92,6 +92,8 @@ Executes instructions that unconditionally cause VM exits (CPUID is the canonica
 
 ## Architecture
 
+![virt-jitter-lab architecture](docs/architecture.svg)
+
 ```
 ┌────────────────────────────────────────────────┐
 │  virt-jitter-lab                               │

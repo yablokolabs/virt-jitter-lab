@@ -1,0 +1,13 @@
+flowchart TB
+    A["Execution Host / Guest"] --> B["Hypervisor Detection"]
+    A --> C["Sleep Jitter Probe"]
+    A --> D["Preemption Gap Probe"]
+    A --> E["IPC Latency Bench"]
+    A --> F["VM-exit Cost Probe"]
+
+    C --> G["Timing Samples"]
+    D --> G
+    E --> G
+    F --> G
+
+    G --> H["Reports / Histograms / Summaries"]

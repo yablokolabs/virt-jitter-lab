@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#666"/>
+    </marker>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="1" stdDeviation="2" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <text x="360" y="25" text-anchor="middle" font-size="14" font-weight="600" fill="#e65100">virt-jitter-lab — Architecture</text>
+
+  <!-- Execution Host -->
+  <rect x="240" y="45" width="240" height="45" rx="6" fill="#fff3e0" stroke="#f57c00" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="360" y="68" text-anchor="middle" font-size="12" font-weight="600" fill="#e65100">Execution Host / Guest</text>
+  <text x="360" y="82" text-anchor="middle" font-size="9" fill="#666">CPUID · TSC · CLOCK_MONOTONIC</text>
+
+  <!-- Probes -->
+  <rect x="40" y="120" width="145" height="60" rx="6" fill="#ffe0b2" stroke="#f57c00" stroke-width="1" filter="url(#shadow)"/>
+  <text x="112" y="145" text-anchor="middle" font-size="10" font-weight="600" fill="#333">Hypervisor</text>
+  <text x="112" y="160" text-anchor="middle" font-size="10" font-weight="600" fill="#333">Detection</text>
+  <text x="112" y="174" text-anchor="middle" font-size="8" fill="#888">CPUID leaf 0x40000000</text>
+
+  <rect x="200" y="120" width="130" height="60" rx="6" fill="#ffe0b2" stroke="#f57c00" stroke-width="1" filter="url(#shadow)"/>
+  <text x="265" y="145" text-anchor="middle" font-size="10" font-weight="600" fill="#333">Sleep Jitter</text>
+  <text x="265" y="160" text-anchor="middle" font-size="10" font-weight="600" fill="#333">Probe</text>
+  <text x="265" y="174" text-anchor="middle" font-size="8" fill="#888">clock_nanosleep Δ</text>
+
+  <rect x="345" y="120" width="130" height="60" rx="6" fill="#ffe0b2" stroke="#f57c00" stroke-width="1" filter="url(#shadow)"/>
+  <text x="410" y="145" text-anchor="middle" font-size="10" font-weight="600" fill="#333">Preemption</text>
+  <text x="410" y="160" text-anchor="middle" font-size="10" font-weight="600" fill="#333">Gap Probe</text>
+  <text x="410" y="174" text-anchor="middle" font-size="8" fill="#888">Tight-loop rdtscp</text>
+
+  <rect x="490" y="120" width="100" height="60" rx="6" fill="#ffe0b2" stroke="#f57c00" stroke-width="1" filter="url(#shadow)"/>
+  <text x="540" y="145" text-anchor="middle" font-size="10" font-weight="600" fill="#333">IPC Latency</text>
+  <text x="540" y="160" text-anchor="middle" font-size="10" font-weight="600" fill="#333">Bench</text>
+  <text x="540" y="174" text-anchor="middle" font-size="8" fill="#888">pipe / sock / shm</text>
+
+  <rect x="605" y="120" width="100" height="60" rx="6" fill="#ffe0b2" stroke="#f57c00" stroke-width="1" filter="url(#shadow)"/>
+  <text x="655" y="145" text-anchor="middle" font-size="10" font-weight="600" fill="#333">VM-exit</text>
+  <text x="655" y="160" text-anchor="middle" font-size="10" font-weight="600" fill="#333">Cost Probe</text>
+  <text x="655" y="174" text-anchor="middle" font-size="8" fill="#888">CPUID trap cost</text>
+
+  <!-- Arrows from host to probes -->
+  <line x1="280" y1="90" x2="112" y2="120" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="320" y1="90" x2="265" y2="120" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="360" y1="90" x2="410" y2="120" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="420" y1="90" x2="540" y2="120" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="450" y1="90" x2="655" y2="120" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Timing Samples -->
+  <rect x="160" y="210" width="400" height="40" rx="6" fill="#fff8e1" stroke="#ffa726" stroke-width="1" filter="url(#shadow)"/>
+  <text x="360" y="235" text-anchor="middle" font-size="11" font-weight="600" fill="#e65100">Timing Samples (nanosecond-resolution)</text>
+
+  <!-- Arrows to samples -->
+  <line x1="265" y1="180" x2="300" y2="210" stroke="#666" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="4"/>
+  <line x1="410" y1="180" x2="380" y2="210" stroke="#666" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="4"/>
+  <line x1="540" y1="180" x2="460" y2="210" stroke="#666" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="4"/>
+  <line x1="655" y1="180" x2="520" y2="210" stroke="#666" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="4"/>
+
+  <!-- Statistics -->
+  <rect x="120" y="275" width="220" height="55" rx="6" fill="#fff" stroke="#f57c00" stroke-width="1" stroke-dasharray="4"/>
+  <text x="230" y="298" text-anchor="middle" font-size="11" font-weight="600" fill="#e65100">Statistical Analysis</text>
+  <text x="230" y="315" text-anchor="middle" font-size="9" fill="#888">min · mean · median · p90–p99.99 · max · σ · outliers</text>
+
+  <!-- Report -->
+  <rect x="380" y="275" width="220" height="55" rx="6" fill="#fff" stroke="#f57c00" stroke-width="1" stroke-dasharray="4"/>
+  <text x="490" y="298" text-anchor="middle" font-size="11" font-weight="600" fill="#e65100">Assessment Report</text>
+  <text x="490" y="315" text-anchor="middle" font-size="9" fill="#888">Environment · Overhead · Verdict</text>
+
+  <!-- Arrows to outputs -->
+  <line x1="300" y1="250" x2="230" y2="275" stroke="#f57c00" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="3"/>
+  <line x1="420" y1="250" x2="490" y2="275" stroke="#f57c00" stroke-width="1" marker-end="url(#arrow)" stroke-dasharray="3"/>
+
+  <!-- Footer -->
+  <text x="360" y="370" text-anchor="middle" font-size="9" fill="#adb5bd" font-style="italic">x86_64 · Linux · Measurements are platform-dependent · Apache-2.0</text>
+</svg>
